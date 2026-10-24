@@ -25,7 +25,7 @@ body {
   background: var(--bg);
   line-height: 1.7;
   font-size: 15.5px;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 img, svg { display: block; }
 a { color: inherit; text-decoration: none; }
@@ -664,4 +664,82 @@ body.modal-open { overflow: hidden; }
   .slide { min-width: 100%; margin: 0; }
   .topbar__item--right { display: none; }
   .about__exp { right: 6px; }
+}
+
+/* ===== Mobile refinements (phones ≤480px) ===== */
+@media (max-width: 480px) {
+  html, body { overflow-x: clip; }
+  html { scroll-padding-top: 78px; }
+  body { font-size: 15px; }
+  .container { width: 90%; }
+
+  /* Topbar: single centered item */
+  .topbar__inner { justify-content: center; gap: 14px; }
+
+  /* Hero: center content, stack buttons, tame floating cards */
+  .hero { padding: 52px 0 84px; }
+  .hero__content { text-align: center; }
+  .hero__content p { margin-inline: auto; }
+  .hero__actions { justify-content: center; }
+  .hero__actions .btn { min-width: min(100%, 240px); justify-content: center; }
+  .hero__badges { justify-content: center; gap: 12px 18px; margin-top: 22px; }
+  .hero__visual { min-height: 300px; max-width: 100%; }
+  .hero__card--main { inset: 14px 4% 46px 4%; }
+  .hero__card--float1, .hero__card--float2 { padding: 9px 14px; }
+  .hero__card strong { font-size: 0.95rem; }
+  .hero__card--main p { font-size: 0.95rem; }
+  .hero__tooth { width: 52px; height: 52px; }
+  .hero__tooth svg { width: 27px; height: 27px; }
+
+  /* Feature strip */
+  .strip { margin-top: -32px; }
+  .strip__grid { padding: 18px 14px; gap: 14px; }
+  .strip__icon { width: 40px; height: 40px; }
+
+  /* Sections & grids */
+  .section { padding: 52px 0; }
+  .section__head { margin-bottom: 30px; }
+  .about__grid, .why__grid, .contact__grid { gap: 38px; }
+
+  /* Cards */
+  .card { padding: 22px 18px; }
+  .card__img { width: calc(100% + 36px); margin: -22px -18px 14px; height: 150px; }
+
+  /* About badge stays on-screen */
+  .about__exp { bottom: -14px; right: 8px; padding: 12px 16px; font-size: 1.25rem; }
+
+  /* Panels */
+  .why__panel { padding: 30px 22px; }
+  .why__hours li { padding: 10px 12px; font-size: 0.82rem; }
+  .btn--block { width: 100%; }
+
+  /* Stats */
+  .stats { padding: 40px 0; }
+  .stats__grid { gap: 18px; }
+
+  /* Testimonials */
+  .slide { padding: 24px 20px; margin: 0; }
+
+  /* Booking CTA + modal */
+  .booking-cta { padding: 34px 22px; }
+  .booking-cta .btn--lg { width: 100%; justify-content: center; }
+  .modal { padding: 14px; }
+  .modal__box { padding: 28px 20px 24px; }
+  .form__actions { flex-direction: column-reverse; align-items: stretch; }
+  .form__actions .btn { width: 100%; justify-content: center; }
+
+  /* Stop Android Chrome zoom-on-focus (inputs need ≥16px) */
+  .form__field input,
+  .form__field select,
+  .form__field textarea { font-size: 16px; padding: 13px 14px; }
+  .form__field label { font-size: 0.95rem; }
+  .form__field select { color: var(--ink); } /* keeps placeholder dim via :invalid rule above */
+
+  /* Footer */
+  .footer { padding-top: 44px; }
+  .footer__grid { gap: 28px; }
+
+  /* Float buttons smaller */
+  .float-actions { right: 14px; bottom: 16px; gap: 10px; }
+  .float-btn { width: 46px; height: 46px; }
 }
