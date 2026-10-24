@@ -25,7 +25,7 @@ body {
   background: var(--bg);
   line-height: 1.7;
   font-size: 15.5px;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 img, svg { display: block; }
 a { color: inherit; text-decoration: none; }
@@ -103,8 +103,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.96); /* no backdrop-filter here: it makes sticky header the containing block for the fixed nav drawer */
   border-bottom: 1px solid transparent;
   transition: 0.3s;
 }
@@ -145,8 +144,18 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .nav__link:hover::after, .nav__link.active::after { width: 100%; }
 .nav__link.active { color: var(--primary); }
 
-.hamburger { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
-.hamburger span { display: block; width: 24px; height: 2.5px; background: var(--ink); margin: 5px 0; border-radius: 2px; transition: 0.3s; }
+.hamburger {
+  display: none;
+  background: var(--primary-light);
+  border: 1.5px solid var(--primary);
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 11px 10px;
+  box-shadow: 0 4px 12px rgba(14, 143, 138, 0.25);
+}
+.hamburger span { display: block; width: 22px; height: 3px; background: var(--primary-dark); margin: 4.5px 0; border-radius: 2px; transition: 0.3s; }
+.hamburger.open { background: var(--primary); border-color: var(--primary); }
+.hamburger.open span { background: #fff; }
 .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
@@ -641,10 +650,11 @@ body.modal-open { overflow: hidden; }
     inset: 0 0 0 auto;
     width: min(320px, 84vw);
     background: #fff;
+    z-index: 105;
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
-    padding: 100px 30px 30px;
+    padding: 96px 30px 30px;
     box-shadow: var(--shadow-lg);
     transform: translateX(100%);
     transition: 0.35s ease;
@@ -668,7 +678,6 @@ body.modal-open { overflow: hidden; }
 
 /* ===== Mobile refinements (phones ≤480px) ===== */
 @media (max-width: 480px) {
-  html, body { overflow-x: clip; }
   html { scroll-padding-top: 78px; }
   body { font-size: 15px; }
   .container { width: 90%; }
